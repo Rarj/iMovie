@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import rio.arj.imovie.R
 import rio.arj.imovie.databinding.ActivityMainBinding
 import rio.arj.imovie.features.category.CategoryBottomSheet
-import rio.arj.imovie.repository.list.model.ListResponse
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,8 +25,6 @@ class MainActivity : AppCompatActivity() {
     binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
     binding.viewModel = viewModel
     binding.lifecycleOwner = this
-
-    viewModel.getPopularMovie()
 
     listener()
     observer()
@@ -53,19 +50,16 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun observer() {
-    viewModel.listResponse.observe(this, {
+    viewModel.movieList.observe(this, {
       if (it != null) {
-        setAdapter(it)
+        mainAdapter = MainAdapter()
+        mainAdapter.submitList(it)
+
+        binding.recyclerMovie.apply {
+          layoutManager = LinearLayoutManager(this@MainActivity)
+          adapter = mainAdapter
+        }
       }
     })
-  }
-
-  private fun setAdapter(movieList: ListResponse) {
-    mainAdapter = MainAdapter(movieList)
-
-    binding.recyclerMovie.apply {
-      layoutManager = LinearLayoutManager(this@MainActivity)
-      adapter = mainAdapter
-    }
   }
 }

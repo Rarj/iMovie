@@ -7,9 +7,11 @@ import rio.arj.imovie.network.ApiService
 import rio.arj.imovie.network.NetworkBuilder
 import rio.arj.imovie.repository.list.model.ListResponse
 
-class ListRepositoryImpl(private val apiService: ApiService) : ListRepository {
-  override fun getPopular(): Observable<ListResponse> {
-    return apiService.getPopularMovie(NetworkBuilder().API_KEY)
+class ListRepositoryImpl(
+  private val apiService: ApiService
+) : ListRepository {
+  override fun getPopular(page: Int): Observable<ListResponse> {
+    return apiService.getPopularMovie(NetworkBuilder().API_KEY, page)
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
   }

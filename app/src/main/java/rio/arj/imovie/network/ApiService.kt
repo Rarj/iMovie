@@ -8,6 +8,9 @@ import rio.arj.imovie.repository.list.model.ListResponse
 interface ApiService {
 
   @GET("popular")
-  fun getPopularMovie(@Query("api_key") api_key: String): Observable<ListResponse>
+  fun getPopularMovie(
+    @Query("api_key") api_key: String,
+    @Query("page") page: Int
+  ): Observable<ListResponse>
 
 }
