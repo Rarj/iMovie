@@ -18,8 +18,8 @@ class NetworkBuilder {
       .build()
   }
 
-  fun getEndpoint(): ApiInterface {
-    return getRetrofitClient().create(ApiInterface::class.java)
+  fun getEndpoint(): ApiService {
+    return getRetrofitClient().create(ApiService::class.java)
   }
 
 }
