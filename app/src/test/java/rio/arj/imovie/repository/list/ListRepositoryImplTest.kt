@@ -25,11 +25,16 @@ class ListRepositoryImplTest {
 
   @Test
   fun `fetch valid response from popular remote`() {
-    val expectedResponse = ListResponse(results = listOf(result))
-    val result = ListResponse(results = listOf(result))
+    val expectedResponse = ListResponse(results = arrayListOf(Result(1, "", "", "", "", 5.1)))
+    var result = ListResponse(results = arrayListOf(result))
 
-    `when`(repository.getPopular())
+    `when`(repository.getPopular(1))
       .thenReturn(Observable.just(expectedResponse))
+
+    repository.getPopular(1)
+      .subscribe {
+        result = it
+      }
 
     assertEquals(expectedResponse, result)
   }
