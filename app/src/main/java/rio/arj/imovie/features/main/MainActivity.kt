@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import rio.arj.imovie.R
 import rio.arj.imovie.databinding.ActivityMainBinding
+import rio.arj.imovie.features.category.CategoryBottomSheet
 import rio.arj.imovie.repository.list.model.ListResponse
 
 
@@ -40,6 +41,14 @@ class MainActivity : AppCompatActivity() {
         }
       }
       true
+    }
+
+    binding.buttonCategory.setOnClickListener {
+      val categoryBottomSheet = CategoryBottomSheet()
+      categoryBottomSheet.apply {
+        isCancelable = false
+      }
+      categoryBottomSheet.show(supportFragmentManager, categoryBottomSheet.tag)
     }
   }
 
