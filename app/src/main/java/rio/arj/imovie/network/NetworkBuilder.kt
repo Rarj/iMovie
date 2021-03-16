@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class NetworkBuilder {
 
   private val BASE_URL = "https://api.themoviedb.org/3/movie/"
-  val API_KEY = "33ef4526082667e26fd77c6773694d55"
+  val API_KEY = "e453f10d64792f6589dafa2c98d57de0"
 
   private fun getRetrofitClient(): Retrofit {
     return Retrofit.Builder()

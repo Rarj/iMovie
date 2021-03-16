@@ -2,11 +2,12 @@ package rio.arj.imovie.network
 
 import io.reactivex.Observable
 import retrofit2.http.GET
+import retrofit2.http.Query
 import rio.arj.imovie.repository.list.model.ListResponse
 
 interface ApiInterface {
 
-  @GET("popular?api_key=e453f10d64792f6589dafa2c98d57de0")
-  fun getPopularMovie(): Observable<ListResponse>
+  @GET("popular")
+  fun getPopularMovie(@Query("api_key") api_key: String): Observable<ListResponse>
 
 }
