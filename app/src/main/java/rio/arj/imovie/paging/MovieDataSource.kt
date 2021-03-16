@@ -6,8 +6,8 @@ import rio.arj.imovie.network.ApiService
 import rio.arj.imovie.repository.list.ListRepositoryImpl
 import rio.arj.imovie.repository.list.model.Result
 
-class MovieDateSource(
-  private val apiService: ApiService,
+class MovieDataSource(
+  apiService: ApiService,
   private val compositeDisposable: CompositeDisposable
 ) : PageKeyedDataSource<Long, Result>() {
 

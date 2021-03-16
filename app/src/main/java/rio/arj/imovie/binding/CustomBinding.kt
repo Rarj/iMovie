@@ -1,4 +1,4 @@
-package rio.arj.imovie.custombinding
+package rio.arj.imovie.binding
 
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
