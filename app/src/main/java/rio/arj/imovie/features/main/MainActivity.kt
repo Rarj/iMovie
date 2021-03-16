@@ -1,6 +1,7 @@
 package rio.arj.imovie.features.main
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -27,15 +28,18 @@ class MainActivity : AppCompatActivity() {
 
     viewModel.getPopularMovie()
 
+    listener()
     observer()
   }
 
-  private fun setAdapter(movieList: ListResponse) {
-    mainAdapter = MainAdapter(movieList)
-
-    binding.recyclerMovie.apply {
-      layoutManager = LinearLayoutManager(this@MainActivity)
-      adapter = mainAdapter
+  private fun listener() {
+    binding.toolbar.setOnMenuItemClickListener {
+      when (it.itemId) {
+        R.id.menu_favorite -> {
+          Toast.makeText(this, "favorite clicked", Toast.LENGTH_SHORT).show()
+        }
+      }
+      true
     }
   }
 
@@ -45,5 +49,14 @@ class MainActivity : AppCompatActivity() {
         setAdapter(it)
       }
     })
+  }
+
+  private fun setAdapter(movieList: ListResponse) {
+    mainAdapter = MainAdapter(movieList)
+
+    binding.recyclerMovie.apply {
+      layoutManager = LinearLayoutManager(this@MainActivity)
+      adapter = mainAdapter
+    }
   }
 }

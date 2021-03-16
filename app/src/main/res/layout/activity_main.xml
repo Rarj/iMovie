@@ -15,6 +15,19 @@
     android:layout_height="match_parent"
     tools:context=".features.main.MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:background="@color/blue_46B7FB"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:menu="@menu/menu"
+      app:title="iMovie"
+      app:titleTextAppearance="@style/TextAppearance.AppCompat.Headline"
+      app:titleTextColor="@color/white" />
+
     <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/recycler_movie"
       android:layout_width="0dp"
@@ -22,7 +35,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/toolbar"
       tools:listitem="@layout/item_movie" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
