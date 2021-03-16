@@ -10,9 +10,9 @@ object CustomBinding {
 
   @JvmStatic
   @BindingAdapter("app:imageUrl")
-  fun setImageUrl(imageView: AppCompatImageView, url: String) {
+  fun setImageUrl(imageView: AppCompatImageView, url: String?) {
     val urlImage = NetworkBuilder().BASE_URL_IMAGE + url
-    if (url.isNotBlank()) {
+    if (url != null) {
       imageView.setImage(urlImage)
     } else {
       imageView.setImage(R.drawable.ic_photo_placeholder)

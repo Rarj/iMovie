@@ -9,10 +9,16 @@ data class Result(
   @SerializedName("poster_path")
   val posterPath: String?,
   @SerializedName("release_date")
-  val releaseDate: String,
+  val releaseDate: String?,
   val title: String,
   @SerializedName("vote_average")
   val voteAverage: Double
 ) {
-  fun getReleaseDateFormatted() = DateUtils().formatDate("dd MMMM yyyy", releaseDate)
+  fun getReleaseDateFormatted(): String {
+    return if (releaseDate?.isBlank() == true || releaseDate == null) {
+      "Unknown"
+    } else {
+      DateUtils().formatDate("dd MMMM yyyy", releaseDate)
+    }
+  }
 }
