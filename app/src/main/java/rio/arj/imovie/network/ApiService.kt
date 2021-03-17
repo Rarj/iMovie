@@ -6,6 +6,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 import rio.arj.imovie.repository.detail.model.DetailResult
 import rio.arj.imovie.repository.list.model.ListResponse
+import rio.arj.imovie.repository.review.model.ReviewResponse
 
 interface ApiService {
 
@@ -39,5 +40,11 @@ interface ApiService {
     @Query("api_key") api_key: String
   ): Observable<DetailResult>
 
+  @GET("{movie_id}/reviews")
+  fun getReviews(
+    @Path("movie_id") movieId: Int,
+    @Query("page") page: Int,
+    @Query("api_key") api_key: String
+  ): Observable<ReviewResponse>
 
 }

@@ -1,22 +1,22 @@
-package rio.arj.imovie.paging
+package rio.arj.imovie.paging.reviews
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import io.reactivex.disposables.CompositeDisposable
 import rio.arj.imovie.network.ApiService
-import rio.arj.imovie.repository.list.model.Result
+import rio.arj.imovie.repository.review.model.Result
 
-class MovieDataSourceFactory(
-  private var categoryId: String,
+class ReviewDataSourceFactory(
+  private var movieId: Int,
   private val apiService: ApiService,
   private val compositeDisposable: CompositeDisposable
 ) : DataSource.Factory<Long, Result>() {
 
-  val newsDataSourceLiveData = MutableLiveData<MovieDataSource>()
+  val reviewDataSourceLiveData = MutableLiveData<ReviewDataSource>()
 
   override fun create(): DataSource<Long, Result> {
-    val newsDataSource = MovieDataSource(categoryId, apiService, compositeDisposable)
-    newsDataSourceLiveData.postValue(newsDataSource)
+    val newsDataSource = ReviewDataSource(movieId, apiService, compositeDisposable)
+    reviewDataSourceLiveData.postValue(newsDataSource)
     return newsDataSource
   }
 }

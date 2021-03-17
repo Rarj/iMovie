@@ -6,7 +6,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import io.reactivex.disposables.CompositeDisposable
 import rio.arj.imovie.network.NetworkBuilder
-import rio.arj.imovie.paging.MovieDataSourceFactory
+import rio.arj.imovie.paging.movie.MovieDataSourceFactory
 import rio.arj.imovie.repository.list.model.Result
 
 class PopularViewModel : ViewModel() {

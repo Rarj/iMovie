@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import rio.arj.imovie.R
 import rio.arj.imovie.databinding.ActivityDetailMovieBinding
 
@@ -12,6 +13,8 @@ class DetailMovieActivity : AppCompatActivity() {
 
   lateinit var viewModel: DetailMovieViewModel
   lateinit var binding: ActivityDetailMovieBinding
+
+  lateinit var reviewAdapter: ReviewAdapter
 
   val movieId by lazy {
     intent.getIntExtra(EXTRA_MOVIE_ID, -1)
@@ -25,6 +28,7 @@ class DetailMovieActivity : AppCompatActivity() {
     binding.viewModel = viewModel
     binding.lifecycleOwner = this
 
+    viewModel.getReviews(movieId)
     viewModel.getDetailMovie(movieId)
     viewModel.findMovieById(movieId)
 
@@ -61,6 +65,16 @@ class DetailMovieActivity : AppCompatActivity() {
           binding.buttonAddToFavorite.setImageDrawable(
             ContextCompat.getDrawable(this@DetailMovieActivity, R.drawable.ic_favorite_border_red)
           )
+        }
+      })
+
+      reviewList.observe(this@DetailMovieActivity, {
+        reviewAdapter = ReviewAdapter()
+        reviewAdapter.submitList(it)
+
+        binding.recyclerReview.apply {
+          layoutManager = LinearLayoutManager(this@DetailMovieActivity)
+          adapter = reviewAdapter
         }
       })
     }

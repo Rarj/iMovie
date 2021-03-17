@@ -1,4 +1,4 @@
-package rio.arj.imovie.paging
+package rio.arj.imovie.paging.movie
 
 import androidx.paging.PageKeyedDataSource
 import io.reactivex.disposables.CompositeDisposable
