@@ -67,6 +67,9 @@ dependencies {
 
     implementation('android.arch.paging:runtime:1.0.1')
 
+    implementation('androidx.room:room-runtime:2.2.6')
+    kapt('androidx.room:room-compiler:2.2.6')
+
     testImplementation 'org.mockito:mockito-core:2.28.2'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
