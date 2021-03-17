@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     binding.buttonCategory.setOnClickListener {
       val categoryBottomSheet = CategoryBottomSheet { id ->
+        selectedCategoryId = id
         when (id) {
           "1" -> showFragment(PopularFragment())
           "2" -> showFragment(UpcomingFragment())
