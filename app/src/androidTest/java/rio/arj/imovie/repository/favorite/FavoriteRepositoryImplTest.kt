@@ -2,6 +2,7 @@ package rio.arj.imovie.repository.favorite
 
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import junit.framework.Assert.assertTrue
 import junit.framework.TestCase.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -40,6 +41,16 @@ class FavoriteRepositoryImplTest {
 
     val isNotEmpty = detailMovieDao?.getMovieById(detail.id)?.isNotEmpty()
     assertEquals(true, isNotEmpty)
+  }
+
+  @Test
+  fun success_delete_favorite_movie_by_id() {
+    val detail = DetailMovieEntity(222, "", "", "", "", 10.0)
+    detailMovieDao?.addToFavorite(detail)
+
+    detailMovieDao?.deleteMovieById(detail.id)
+    val isEmpty = detailMovieDao?.getMovieById(detail.id)?.isEmpty()
+    assertTrue(isEmpty == true)
   }
 
 }

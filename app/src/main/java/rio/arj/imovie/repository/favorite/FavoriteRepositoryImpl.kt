@@ -30,4 +30,12 @@ class FavoriteRepositoryImpl : FavoriteRepository {
         it.isNotEmpty()
       }
   }
+
+  override fun deleteMovieById(movieId: Int): Observable<Boolean> {
+    return Observable.fromCallable {
+      favoriteDao?.deleteMovieById(movieId)
+    }.subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
+      .map { true }
+  }
 }

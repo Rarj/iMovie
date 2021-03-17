@@ -11,11 +11,17 @@ import rio.arj.imovie.repository.favorite.entity.DetailMovieEntity
 
 class DetailMovieViewModel : ViewModel() {
 
+  val compositeDisposable = CompositeDisposable()
+
   var detailMovie = MutableLiveData<DetailResult>()
     private set
 
   var isMovieFavorited = MutableLiveData(false)
     private set
+
+  fun setFavorite(checked: Boolean) {
+    isMovieFavorited.value = checked
+  }
 
   fun getDetailMovie(id: Int) {
     val compositeDisposable = CompositeDisposable()
@@ -43,8 +49,16 @@ class DetailMovieViewModel : ViewModel() {
     )
   }
 
+  fun deleteFavorite(movieId: Int) {
+    compositeDisposable.add(
+      FavoriteRepositoryImpl().deleteMovieById(movieId)
+        .subscribe {
+          isMovieFavorited.value = false
+        }
+    )
+  }
+
   fun findMovieById(movieId: Int) {
-    val compositeDisposable = CompositeDisposable()
     compositeDisposable.add(
       FavoriteRepositoryImpl().findDetailById(movieId)
         .subscribe(
@@ -55,6 +69,11 @@ class DetailMovieViewModel : ViewModel() {
           }
         )
     )
+  }
+
+  override fun onCleared() {
+    super.onCleared()
+    compositeDisposable.clear()
   }
 
 }

@@ -11,5 +11,6 @@ data class DetailMovieEntity(
   val posterPath: String?,
   val releaseDate: String?,
   val title: String,
-  val voteAverage: Double
+  val voteAverage: Double,
+  val dateAdded: String = System.currentTimeMillis().toString()
 )

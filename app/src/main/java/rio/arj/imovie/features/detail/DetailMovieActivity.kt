@@ -13,6 +13,10 @@ class DetailMovieActivity : AppCompatActivity() {
   lateinit var viewModel: DetailMovieViewModel
   lateinit var binding: ActivityDetailMovieBinding
 
+  val movieId by lazy {
+    intent.getIntExtra(EXTRA_MOVIE_ID, -1)
+  }
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
@@ -21,7 +25,6 @@ class DetailMovieActivity : AppCompatActivity() {
     binding.viewModel = viewModel
     binding.lifecycleOwner = this
 
-    val movieId = intent.getIntExtra(EXTRA_MOVIE_ID, -1)
     viewModel.getDetailMovie(movieId)
     viewModel.findMovieById(movieId)
 
@@ -33,7 +36,13 @@ class DetailMovieActivity : AppCompatActivity() {
     binding.toolbar.setNavigationOnClickListener { finish() }
 
     binding.buttonAddToFavorite.setOnClickListener {
-      viewModel.addToFavorite()
+      if (viewModel.isMovieFavorited.value == true) {
+        viewModel.deleteFavorite(movieId)
+      } else {
+        viewModel.addToFavorite()
+      }
+
+      viewModel.setFavorite(!viewModel.isMovieFavorited.value!!)
     }
   }
 
