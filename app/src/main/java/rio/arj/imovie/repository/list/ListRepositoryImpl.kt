@@ -15,4 +15,10 @@ class ListRepositoryImpl(
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
   }
+
+  override fun getUpcoming(page: Int): Observable<ListResponse> {
+    return apiService.getUpcomingMovie(NetworkBuilder().API_KEY, page)
+      .subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
+  }
 }

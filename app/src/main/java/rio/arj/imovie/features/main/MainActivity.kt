@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
 
   lateinit var mainAdapter: MainAdapter
 
+  private var selectedCategoryId: String = "1"
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
@@ -41,8 +43,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     binding.buttonCategory.setOnClickListener {
-      val categoryBottomSheet = CategoryBottomSheet()
+      val categoryBottomSheet = CategoryBottomSheet { id ->
+        selectedCategoryId = id
+        viewModel.movieDataSourceFactory.newsDataSourceLiveData.value?.invalidate()
+        viewModel.reloadMovie(selectedCategoryId)
+      }
 
+      val bundle = Bundle()
+      bundle.putString(CategoryBottomSheet.ARGS_ID, selectedCategoryId)
+      categoryBottomSheet.arguments = bundle
       categoryBottomSheet.show(supportFragmentManager, categoryBottomSheet.tag)
     }
   }

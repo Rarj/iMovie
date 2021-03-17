@@ -14,15 +14,19 @@ class MainViewModel : ViewModel() {
   private val compositeDisposable = CompositeDisposable()
   private val apiService = NetworkBuilder().getEndpoint()
 
-  var movieList: LiveData<PagedList<Result>>
-  private val movieDataSourceFactory: MovieDataSourceFactory
+  lateinit var movieList: LiveData<PagedList<Result>>
+  lateinit var movieDataSourceFactory: MovieDataSourceFactory
 
   init {
-    movieDataSourceFactory = MovieDataSourceFactory(apiService, compositeDisposable)
+    reloadMovie("1")
+  }
+
+  fun reloadMovie(categoryId: String) {
+    movieDataSourceFactory = MovieDataSourceFactory(categoryId, apiService, compositeDisposable)
     val config = PagedList.Config.Builder()
       .setPageSize(20)
       .setInitialLoadSizeHint(20 * 2)
-      .setEnablePlaceholders(false)
+      .setEnablePlaceholders(true)
       .build()
     movieList = LivePagedListBuilder(movieDataSourceFactory, config).build()
   }
