@@ -21,4 +21,13 @@ class FavoriteRepositoryImpl : FavoriteRepository {
       .subscribe()
   }
 
+  override fun findDetailById(movieId: Int): Observable<Boolean> {
+    return Observable.fromCallable {
+      favoriteDao?.getMovieById(movieId)
+    }.subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
+      .map {
+        it.isNotEmpty()
+      }
+  }
 }

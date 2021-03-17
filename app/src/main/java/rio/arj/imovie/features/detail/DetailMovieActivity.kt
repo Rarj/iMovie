@@ -2,6 +2,7 @@ package rio.arj.imovie.features.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import rio.arj.imovie.R
@@ -20,7 +21,9 @@ class DetailMovieActivity : AppCompatActivity() {
     binding.viewModel = viewModel
     binding.lifecycleOwner = this
 
-    viewModel.getDetailMovie(intent.getIntExtra(EXTRA_MOVIE_ID, -1))
+    val movieId = intent.getIntExtra(EXTRA_MOVIE_ID, -1)
+    viewModel.getDetailMovie(movieId)
+    viewModel.findMovieById(movieId)
 
     listener()
     observer()
@@ -35,9 +38,23 @@ class DetailMovieActivity : AppCompatActivity() {
   }
 
   private fun observer() {
-    viewModel.detailMovie.observe(this, { detailMovie ->
-      binding.isLoaded = detailMovie != null
-    })
+    with(viewModel) {
+      detailMovie.observe(this@DetailMovieActivity, { detailMovie ->
+        binding.isLoaded = detailMovie != null
+      })
+
+      isMovieFavorited.observe(this@DetailMovieActivity, {
+        if (it) {
+          binding.buttonAddToFavorite.setImageDrawable(
+            ContextCompat.getDrawable(this@DetailMovieActivity, R.drawable.ic_favorite_filled_red)
+          )
+        } else {
+          binding.buttonAddToFavorite.setImageDrawable(
+            ContextCompat.getDrawable(this@DetailMovieActivity, R.drawable.ic_favorite_border_red)
+          )
+        }
+      })
+    }
   }
 
   companion object {

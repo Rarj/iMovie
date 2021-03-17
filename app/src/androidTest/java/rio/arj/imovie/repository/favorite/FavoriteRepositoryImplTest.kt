@@ -33,4 +33,13 @@ class FavoriteRepositoryImplTest {
     assertEquals(true, isNotEmpty)
   }
 
+  @Test
+  fun find_movie_by_id() {
+    val detail = DetailMovieEntity(22, "", "", "", "", 10.0)
+    detailMovieDao?.addToFavorite(detail)
+
+    val isNotEmpty = detailMovieDao?.getMovieById(detail.id)?.isNotEmpty()
+    assertEquals(true, isNotEmpty)
+  }
+
 }

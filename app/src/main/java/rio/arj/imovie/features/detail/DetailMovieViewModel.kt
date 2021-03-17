@@ -14,6 +14,9 @@ class DetailMovieViewModel : ViewModel() {
   var detailMovie = MutableLiveData<DetailResult>()
     private set
 
+  var isMovieFavorited = MutableLiveData(false)
+    private set
+
   fun getDetailMovie(id: Int) {
     val compositeDisposable = CompositeDisposable()
     compositeDisposable.add(
@@ -37,6 +40,20 @@ class DetailMovieViewModel : ViewModel() {
         title = value.title,
         voteAverage = value.voteAverage
       )
+    )
+  }
+
+  fun findMovieById(movieId: Int) {
+    val compositeDisposable = CompositeDisposable()
+    compositeDisposable.add(
+      FavoriteRepositoryImpl().findDetailById(movieId)
+        .subscribe(
+          {
+            isMovieFavorited.value = it
+          }, {
+
+          }
+        )
     )
   }
 
