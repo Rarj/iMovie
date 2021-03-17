@@ -2,7 +2,9 @@ package rio.arj.imovie.network
 
 import io.reactivex.Observable
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
+import rio.arj.imovie.repository.detail.model.DetailResponse
 import rio.arj.imovie.repository.list.model.ListResponse
 
 interface ApiService {
@@ -30,4 +32,12 @@ interface ApiService {
     @Query("api_key") api_key: String,
     @Query("page") page: Int
   ): Observable<ListResponse>
+
+  @GET("{movie_id}}")
+  fun getDetailMovie(
+    @Query("api_key") api_key: String,
+    @Path("movie_id") movieId: Int
+  ): Observable<DetailResponse>
+
+
 }

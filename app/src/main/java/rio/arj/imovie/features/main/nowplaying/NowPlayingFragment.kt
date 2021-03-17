@@ -1,5 +1,6 @@
 package rio.arj.imovie.features.main.nowplaying
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import rio.arj.imovie.R
 import rio.arj.imovie.databinding.FragmentNowPlayingBinding
+import rio.arj.imovie.features.detail.DetailMovieActivity
 import rio.arj.imovie.features.main.MainAdapter
 
 class NowPlayingFragment : Fragment() {
@@ -40,7 +42,9 @@ class NowPlayingFragment : Fragment() {
   private fun observer() {
     viewModel.movieList.observe(this, {
       if (it != null) {
-        mainAdapter = MainAdapter()
+        mainAdapter = MainAdapter { movieId ->
+          goto(DetailMovieActivity::class.java, movieId)
+        }
         mainAdapter.submitList(it)
 
         binding.recyclerMovie.apply {
@@ -49,5 +53,11 @@ class NowPlayingFragment : Fragment() {
         }
       }
     })
+  }
+
+  private fun <T> goto(clazz: Class<T>, movieId: Int) {
+    val intent = Intent(binding.root.context, clazz)
+    intent.putExtra(DetailMovieActivity.EXTRA_MOVIE_ID, movieId)
+    startActivity(intent)
   }
 }

@@ -10,7 +10,9 @@ import rio.arj.imovie.BR
 import rio.arj.imovie.databinding.ItemMovieBinding
 import rio.arj.imovie.repository.list.model.Result
 
-class MainAdapter : PagedListAdapter<Result, MainAdapter.ViewHolder>(diffCallback) {
+class MainAdapter(
+  private val onMovieClicked: (movieId: Int) -> Unit
+) : PagedListAdapter<Result, MainAdapter.ViewHolder>(diffCallback) {
 
   companion object {
     val diffCallback = object : DiffUtil.ItemCallback<Result>() {
@@ -34,14 +36,23 @@ class MainAdapter : PagedListAdapter<Result, MainAdapter.ViewHolder>(diffCallbac
   }
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    holder.bind(getItem(position))
+    holder.bind(getItem(position), onMovieClicked)
   }
 
   class ViewHolder(private val viewDataBinding: ViewDataBinding) :
     RecyclerView.ViewHolder(viewDataBinding.root) {
-    fun bind(model: Result?) {
+    fun bind(
+      model: Result?,
+      onMovieClicked: (movieId: Int) -> Unit
+    ) {
       viewDataBinding.setVariable(BR.movieResult, model)
       viewDataBinding.executePendingBindings()
+
+      viewDataBinding.root.setOnClickListener {
+        onMovieClicked(
+          model?.id ?: throw RuntimeException("movie id must not null")
+        )
+      }
     }
   }
 
