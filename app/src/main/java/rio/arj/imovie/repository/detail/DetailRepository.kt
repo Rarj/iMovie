@@ -1,8 +1,8 @@
 package rio.arj.imovie.repository.detail
 
 import io.reactivex.Observable
-import rio.arj.imovie.repository.detail.model.DetailResponse
+import rio.arj.imovie.repository.detail.model.DetailResult
 
 interface DetailRepository {
-  fun getDetailMovie(detailId: Int): Observable<DetailResponse>
+  fun getDetailMovie(detailId: Int): Observable<DetailResult>
 }

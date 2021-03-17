@@ -1,8 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  tools:context=".features.detail.DetailMovieActivity">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+  <data>
+    <import type="android.view.View" />
+    <variable
+      name="isLoaded"
+      type="Boolean" />
+    <variable
+      name="viewModel"
+      type="rio.arj.imovie.features.detail.DetailMovieViewModel" />
+  </data>
+  <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".features.detail.DetailMovieActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ProgressBar
+      android:id="@+id/progress_circular"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:visibility="@{isLoaded ? View.GONE : View.VISIBLE, default=visible}"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <androidx.appcompat.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:background="@color/blue_46B7FB"
+      app:contentInsetStartWithNavigation="0dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:navigationIcon="@drawable/ic_arrow_back"
+      app:title="@{viewModel.detailMovie.title}"
+      app:titleTextAppearance="@style/TextAppearance.AppCompat.Headline"
+      app:titleTextColor="@color/white"
+      tools:title="@tools:sample/lorem" />
+
+    <androidx.core.widget.NestedScrollView
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:visibility="@{isLoaded ? View.VISIBLE : View.INVISIBLE, default=visible}"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+          android:id="@+id/image_poster"
+          android:layout_width="150dp"
+          android:layout_height="200dp"
+          android:adjustViewBounds="true"
+          android:scaleType="fitXY"
+          app:imageUrl="@{viewModel.detailMovie.posterPath}"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="0"
+          tools:src="@tools:sample/avatars" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/text_title"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:ellipsize="end"
+          android:maxLines="2"
+          android:text="@{viewModel.detailMovie.title}"
+          android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+          app:layout_constraintBottom_toTopOf="@id/text_release_date"
+          app:layout_constraintEnd_toStartOf="@id/button_add_to_favorite"
+          app:layout_constraintStart_toEndOf="@id/image_poster"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="0"
+          app:layout_constraintVertical_chainStyle="packed"
+          tools:text="@tools:sample/lorem" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+          android:id="@+id/button_add_to_favorite"
+          android:layout_width="48dp"
+          android:layout_height="48dp"
+          android:background="@android:color/transparent"
+          android:src="@drawable/ic_favorite_border_red"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toEndOf="@id/text_title"
+          app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/text_release_date"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:text="@{viewModel.detailMovie.releaseDateFormatted}"
+          android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+          app:layout_constraintBottom_toTopOf="@id/text_overview"
+          app:layout_constraintEnd_toStartOf="@id/button_add_to_favorite"
+          app:layout_constraintStart_toEndOf="@id/image_poster"
+          app:layout_constraintTop_toBottomOf="@id/text_title"
+          tools:text="@tools:sample/lorem" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/text_overview"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:layout_marginTop="8dp"
+          android:ellipsize="end"
+          android:text="@{viewModel.detailMovie.overview}"
+          android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toEndOf="@id/image_poster"
+          app:layout_constraintTop_toBottomOf="@id/text_release_date"
+          tools:text="@tools:sample/lorem/random" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

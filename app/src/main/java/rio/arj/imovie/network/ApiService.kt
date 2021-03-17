@@ -4,7 +4,7 @@ import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import rio.arj.imovie.repository.detail.model.DetailResponse
+import rio.arj.imovie.repository.detail.model.DetailResult
 import rio.arj.imovie.repository.list.model.ListResponse
 
 interface ApiService {
@@ -35,9 +35,9 @@ interface ApiService {
 
   @GET("{movie_id}}")
   fun getDetailMovie(
-    @Query("api_key") api_key: String,
-    @Path("movie_id") movieId: Int
-  ): Observable<DetailResponse>
+    @Path("movie_id") movieId: Int,
+    @Query("api_key") api_key: String
+  ): Observable<DetailResult>
 
 
 }
