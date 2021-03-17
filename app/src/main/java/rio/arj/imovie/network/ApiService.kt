@@ -19,4 +19,15 @@ interface ApiService {
     @Query("page") page: Int
   ): Observable<ListResponse>
 
+  @GET("top_rated")
+  fun getTopRatedMovie(
+    @Query("api_key") api_key: String,
+    @Query("page") page: Int
+  ): Observable<ListResponse>
+
+  @GET("now_playing")
+  fun getNowPlayingMovie(
+    @Query("api_key") api_key: String,
+    @Query("page") page: Int
+  ): Observable<ListResponse>
 }

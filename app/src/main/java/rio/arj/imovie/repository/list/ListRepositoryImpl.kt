@@ -21,4 +21,16 @@ class ListRepositoryImpl(
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
   }
+
+  override fun getTopRated(page: Int): Observable<ListResponse> {
+    return apiService.getTopRatedMovie(NetworkBuilder().API_KEY, page)
+      .subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
+  }
+
+  override fun getNowPlaying(page: Int): Observable<ListResponse> {
+    return apiService.getNowPlayingMovie(NetworkBuilder().API_KEY, page)
+      .subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
+  }
 }

@@ -19,24 +19,47 @@ class MovieDataSource(
     callback: LoadInitialCallback<Long, Result>
   ) {
 
-    if (categoryId == "1") {
-      compositeDisposable.add(
-        repository.getPopular(1)
-          .subscribe({ response ->
-            callback.onResult(response.results?.toList() as MutableList<Result>, null, 2)
-          }, {
+    when (categoryId) {
+      "1" -> {
+        compositeDisposable.add(
+          repository.getPopular(1)
+            .subscribe({ response ->
+              callback.onResult(response.results?.toList() as MutableList<Result>, null, 2)
+            }, {
 
-          })
-      )
-    } else if (categoryId == "2") {
-      compositeDisposable.add(
-        repository.getUpcoming(1)
-          .subscribe({ response ->
-            callback.onResult(response.results?.toList() as MutableList<Result>, null, 2)
-          }, {
+            })
+        )
+      }
+      "2" -> {
+        compositeDisposable.add(
+          repository.getUpcoming(1)
+            .subscribe({ response ->
+              callback.onResult(response.results?.toList() as MutableList<Result>, null, 2)
+            }, {
 
-          })
-      )
+            })
+        )
+      }
+      "3" -> {
+        compositeDisposable.add(
+          repository.getTopRated(1)
+            .subscribe({ response ->
+              callback.onResult(response.results?.toList() as MutableList<Result>, null, 2)
+            }, {
+
+            })
+        )
+      }
+      "4" -> {
+        compositeDisposable.add(
+          repository.getNowPlaying(1)
+            .subscribe({ response ->
+              callback.onResult(response.results?.toList() as MutableList<Result>, null, 2)
+            }, {
+
+            })
+        )
+      }
     }
   }
 
@@ -59,6 +82,26 @@ class MovieDataSource(
       "2" -> {
         compositeDisposable.add(
           repository.getUpcoming(params.key.toInt())
+            .subscribe({ response ->
+              callback.onResult(response.results?.toList() as MutableList<Result>, params.key + 1)
+            }, {
+
+            })
+        )
+      }
+      "3" -> {
+        compositeDisposable.add(
+          repository.getTopRated(params.key.toInt())
+            .subscribe({ response ->
+              callback.onResult(response.results?.toList() as MutableList<Result>, params.key + 1)
+            }, {
+
+            })
+        )
+      }
+      "4" -> {
+        compositeDisposable.add(
+          repository.getNowPlaying(params.key.toInt())
             .subscribe({ response ->
               callback.onResult(response.results?.toList() as MutableList<Result>, params.key + 1)
             }, {

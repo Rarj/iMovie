@@ -9,6 +9,7 @@ import rio.arj.imovie.R
 import rio.arj.imovie.databinding.ActivityMainBinding
 import rio.arj.imovie.features.category.CategoryBottomSheet
 import rio.arj.imovie.features.main.popular.PopularFragment
+import rio.arj.imovie.features.main.toprated.TopRatedFragment
 import rio.arj.imovie.features.main.upcoming.UpcomingFragment
 
 
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         when (id) {
           "1" -> showFragment(PopularFragment())
           "2" -> showFragment(UpcomingFragment())
+          "3" -> showFragment(TopRatedFragment())
         }
       }
 
