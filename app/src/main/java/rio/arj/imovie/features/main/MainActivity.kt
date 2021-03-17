@@ -42,9 +42,7 @@ class MainActivity : AppCompatActivity() {
 
     binding.buttonCategory.setOnClickListener {
       val categoryBottomSheet = CategoryBottomSheet()
-      categoryBottomSheet.apply {
-        isCancelable = false
-      }
+
       categoryBottomSheet.show(supportFragmentManager, categoryBottomSheet.tag)
     }
   }

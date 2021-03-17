@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <data>
+    <variable
+      name="viewModel"
+      type="rio.arj.imovie.features.category.CategoryViewModel" />
+  </data>
   <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <androidx.appcompat.widget.AppCompatImageButton
       android:id="@+id/button_close"
@@ -12,9 +18,17 @@
       android:background="@android:color/transparent"
       android:padding="8dp"
       android:src="@drawable/ic_close"
-      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/recycler_category"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/button_close"
+      tools:listitem="@layout/item_category" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
