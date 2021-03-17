@@ -1,7 +1,7 @@
 package rio.arj.imovie.repository.list
 
 import io.reactivex.Observable
-import junit.framework.Assert.assertEquals
+import junit.framework.TestCase.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock

@@ -4,32 +4,27 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
 import rio.arj.imovie.R
 import rio.arj.imovie.databinding.ActivityMainBinding
 import rio.arj.imovie.features.category.CategoryBottomSheet
+import rio.arj.imovie.features.main.popular.PopularFragment
+import rio.arj.imovie.features.main.upcoming.UpcomingFragment
 
 
 class MainActivity : AppCompatActivity() {
 
-  lateinit var viewModel: MainViewModel
   lateinit var binding: ActivityMainBinding
-
-  lateinit var mainAdapter: MainAdapter
 
   private var selectedCategoryId: String = "1"
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
     binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-    binding.viewModel = viewModel
-    binding.lifecycleOwner = this
 
+    showFragment(PopularFragment())
     listener()
-    observer()
   }
 
   private fun listener() {
@@ -44,9 +39,10 @@ class MainActivity : AppCompatActivity() {
 
     binding.buttonCategory.setOnClickListener {
       val categoryBottomSheet = CategoryBottomSheet { id ->
-        selectedCategoryId = id
-        viewModel.movieDataSourceFactory.newsDataSourceLiveData.value?.invalidate()
-        viewModel.reloadMovie(selectedCategoryId)
+        when (id) {
+          "1" -> showFragment(PopularFragment())
+          "2" -> showFragment(UpcomingFragment())
+        }
       }
 
       val bundle = Bundle()
@@ -56,17 +52,11 @@ class MainActivity : AppCompatActivity() {
     }
   }
 
-  private fun observer() {
-    viewModel.movieList.observe(this, {
-      if (it != null) {
-        mainAdapter = MainAdapter()
-        mainAdapter.submitList(it)
-
-        binding.recyclerMovie.apply {
-          layoutManager = LinearLayoutManager(this@MainActivity)
-          adapter = mainAdapter
-        }
-      }
-    })
+  private fun showFragment(fragment: Fragment) {
+    val transaction = supportFragmentManager.beginTransaction()
+    transaction.replace(R.id.container_fragment, fragment)
+    transaction.addToBackStack(null)
+    transaction.commit()
   }
+
 }

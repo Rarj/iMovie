@@ -1,4 +1,4 @@
-package rio.arj.imovie.features.main
+package rio.arj.imovie.features.main.popular
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +9,7 @@ import rio.arj.imovie.network.NetworkBuilder
 import rio.arj.imovie.paging.MovieDataSourceFactory
 import rio.arj.imovie.repository.list.model.Result
 
-class MainViewModel : ViewModel() {
+class PopularViewModel : ViewModel() {
 
   private val compositeDisposable = CompositeDisposable()
   private val apiService = NetworkBuilder().getEndpoint()
