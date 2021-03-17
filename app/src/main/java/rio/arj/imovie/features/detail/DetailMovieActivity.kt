@@ -28,6 +28,10 @@ class DetailMovieActivity : AppCompatActivity() {
 
   private fun listener() {
     binding.toolbar.setNavigationOnClickListener { finish() }
+
+    binding.buttonAddToFavorite.setOnClickListener {
+      viewModel.addToFavorite()
+    }
   }
 
   private fun observer() {
