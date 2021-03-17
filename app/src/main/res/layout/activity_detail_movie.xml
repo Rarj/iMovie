@@ -43,7 +43,7 @@
     <androidx.core.widget.NestedScrollView
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:visibility="@{isLoaded ? View.VISIBLE : View.INVISIBLE, default=visible}"
+      android:visibility="@{isLoaded ? View.VISIBLE : View.INVISIBLE, default=invisible}"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/toolbar">

@@ -22,7 +22,12 @@ class DetailMovieActivity : AppCompatActivity() {
 
     viewModel.getDetailMovie(intent.getIntExtra(EXTRA_MOVIE_ID, -1))
 
+    listener()
     observer()
+  }
+
+  private fun listener() {
+    binding.toolbar.setNavigationOnClickListener { finish() }
   }
 
   private fun observer() {
