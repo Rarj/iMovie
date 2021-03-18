@@ -10,7 +10,9 @@ import rio.arj.imovie.BR
 import rio.arj.imovie.databinding.ItemReviewBinding
 import rio.arj.imovie.repository.review.model.Result
 
-class ReviewAdapter : PagedListAdapter<Result, ReviewAdapter.ViewHolder>(diffCallback) {
+class ReviewAdapter(
+  private val onEmptyState: () -> Unit
+) : PagedListAdapter<Result, ReviewAdapter.ViewHolder>(diffCallback) {
 
   companion object {
     val diffCallback = object : DiffUtil.ItemCallback<Result>() {
@@ -34,14 +36,16 @@ class ReviewAdapter : PagedListAdapter<Result, ReviewAdapter.ViewHolder>(diffCal
   }
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    holder.bind(getItem(position))
+    holder.bind(getItem(position), onEmptyState)
   }
 
   class ViewHolder(private val viewDataBinding: ViewDataBinding) :
     RecyclerView.ViewHolder(viewDataBinding.root) {
-    fun bind(model: Result?) {
+    fun bind(model: Result?, onEmptyStateHide: () -> Unit) {
       viewDataBinding.setVariable(BR.reviewResult, model)
       viewDataBinding.executePendingBindings()
+
+      onEmptyStateHide()
     }
   }
 

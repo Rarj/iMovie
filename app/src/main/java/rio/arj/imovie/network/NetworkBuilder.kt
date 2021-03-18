@@ -8,6 +8,7 @@ class NetworkBuilder {
 
   private val BASE_URL = "https://api.themoviedb.org/3/movie/"
   val BASE_URL_IMAGE = "https://image.tmdb.org/t/p/w342"
+  val BASE_URL_AVATAR = "https://secure.gravatar.com/avatar"
   val API_KEY = "e453f10d64792f6589dafa2c98d57de0"
 
   private fun getRetrofitClient(): Retrofit {

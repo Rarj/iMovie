@@ -8,18 +8,68 @@
   </data>
   <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+      android:id="@+id/image_avatar"
+      android:layout_width="56dp"
+      android:layout_height="56dp"
+      android:adjustViewBounds="true"
+      android:scaleType="centerInside"
+      app:avatarUrl="@{reviewResult.authorDetails.avatarPath}"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:shapeAppearanceOverlay="@style/circleImageView"
+      tools:src="@tools:sample/avatars" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/text_date_created"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="16dp"
+      android:text="@{reviewResult.formattedDate}"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@id/image_avatar"
+      app:layout_constraintTop_toBottomOf="@id/text_author_name"
+      tools:text="@tools:sample/lorem" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/text_author_name"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="16dp"
+      android:text="@{reviewResult.authorDetails.authorName()}"
+      android:textAppearance="@style/TextAppearance.AppCompat.Title"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@id/image_avatar"
+      app:layout_constraintTop_toTopOf="@id/image_avatar"
+      tools:text="@tools:sample/lorem" />
 
     <androidx.appcompat.widget.AppCompatTextView
       android:id="@+id/text_review"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
       android:text="@{reviewResult.content}"
+      android:textAppearance="@style/TextAppearance.AppCompat.Medium"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/image_avatar"
       tools:text="@tools:sample/lorem" />
+
+    <View
+      android:id="@+id/divider"
+      android:layout_width="0dp"
+      android:layout_height="1dp"
+      android:layout_marginTop="8dp"
+      android:background="@android:color/darker_gray"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/text_review" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

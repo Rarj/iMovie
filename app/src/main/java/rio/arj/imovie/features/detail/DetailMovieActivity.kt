@@ -1,6 +1,7 @@
 package rio.arj.imovie.features.detail
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -69,7 +70,9 @@ class DetailMovieActivity : AppCompatActivity() {
       })
 
       reviewList.observe(this@DetailMovieActivity, {
-        reviewAdapter = ReviewAdapter()
+        reviewAdapter = ReviewAdapter {
+          binding.textEmptyState.visibility = View.GONE
+        }
         reviewAdapter.submitList(it)
 
         binding.recyclerReview.apply {

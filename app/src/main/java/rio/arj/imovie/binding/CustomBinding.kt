@@ -19,4 +19,20 @@ object CustomBinding {
     }
   }
 
+  @JvmStatic
+  @BindingAdapter("app:avatarUrl")
+  fun setAvatarUrl(imageView: AppCompatImageView, url: String?) {
+    val convertedUrl = if (url.toString().contains("https")) {
+      url?.removeRange(0, 1).toString()
+    } else {
+      NetworkBuilder().BASE_URL_AVATAR + url.toString()
+    }
+
+    if (url != null) {
+      convertedUrl.let { imageView.setImage(it) }
+    } else {
+      imageView.setImage(R.drawable.ic_photo_placeholder)
+    }
+  }
+
 }
