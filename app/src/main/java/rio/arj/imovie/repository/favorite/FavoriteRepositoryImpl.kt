@@ -38,4 +38,14 @@ class FavoriteRepositoryImpl : FavoriteRepository {
       .observeOn(AndroidSchedulers.mainThread())
       .map { true }
   }
+
+  override fun getAllFavoriteMovie(): Observable<List<DetailMovieEntity>> {
+    return Observable.fromCallable {
+      favoriteDao?.getAllFavoriteMovie()
+    }.subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
+      .map {
+        it
+      }
+  }
 }

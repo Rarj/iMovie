@@ -53,4 +53,9 @@ class FavoriteRepositoryImplTest {
     assertTrue(isEmpty == true)
   }
 
+  @Test
+  fun retrieve_all_favorite_movies() {
+    assertTrue(detailMovieDao?.getAllFavoriteMovie()?.isNotEmpty() ?: false)
+  }
+
 }

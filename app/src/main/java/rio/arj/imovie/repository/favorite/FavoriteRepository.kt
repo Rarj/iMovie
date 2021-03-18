@@ -7,4 +7,5 @@ interface FavoriteRepository {
   fun addToFavorite(detailMovie: DetailMovieEntity)
   fun findDetailById(movieId: Int): Observable<Boolean>
   fun deleteMovieById(movieId: Int): Observable<Boolean>
+  fun getAllFavoriteMovie(): Observable<List<DetailMovieEntity>>
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+  <data>
+    <variable
+      name="viewModel"
+      type="rio.arj.imovie.features.favorite.FavoriteViewModel" />
+  </data>
+  <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.favorite.FavoriteActivity">
+
+    <androidx.appcompat.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:background="@color/blue_46B7FB"
+      app:contentInsetStartWithNavigation="0dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:navigationIcon="@drawable/ic_arrow_back"
+      app:title="Favorite"
+      app:titleTextAppearance="@style/TextAppearance.AppCompat.Headline"
+      app:titleTextColor="@color/white" />
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/recycler_movie"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:overScrollMode="never"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/toolbar"
+      tools:listitem="@layout/item_favorite" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

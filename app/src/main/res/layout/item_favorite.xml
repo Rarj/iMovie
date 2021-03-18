@@ -4,7 +4,7 @@
   <data>
     <variable
       name="movieResult"
-      type="rio.arj.imovie.repository.list.model.Result" />
+      type="rio.arj.imovie.repository.favorite.entity.DetailMovieEntity" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

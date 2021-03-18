@@ -1,13 +1,14 @@
 package rio.arj.imovie.features.main
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import rio.arj.imovie.R
 import rio.arj.imovie.databinding.ActivityMainBinding
 import rio.arj.imovie.features.category.CategoryBottomSheet
+import rio.arj.imovie.features.favorite.FavoriteActivity
 import rio.arj.imovie.features.main.nowplaying.NowPlayingFragment
 import rio.arj.imovie.features.main.popular.PopularFragment
 import rio.arj.imovie.features.main.toprated.TopRatedFragment
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     binding.toolbar.setOnMenuItemClickListener {
       when (it.itemId) {
         R.id.menu_favorite -> {
-          Toast.makeText(this, "favorite clicked", Toast.LENGTH_SHORT).show()
+          startActivity(Intent(this, FavoriteActivity::class.java))
         }
       }
       true

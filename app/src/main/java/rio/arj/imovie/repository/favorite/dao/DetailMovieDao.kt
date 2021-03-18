@@ -19,4 +19,7 @@ interface DetailMovieDao {
   @Query("DELETE FROM DetailMovieEntity WHERE id=:movieId")
   fun deleteMovieById(movieId: Int)
 
+  @Query("SELECT * FROM DetailMovieEntity")
+  fun getAllFavoriteMovie(): List<DetailMovieEntity>
+
 }

@@ -1,5 +1,6 @@
 package rio.arj.imovie.features.detail
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -38,7 +39,10 @@ class DetailMovieActivity : AppCompatActivity() {
   }
 
   private fun listener() {
-    binding.toolbar.setNavigationOnClickListener { finish() }
+    binding.toolbar.setNavigationOnClickListener {
+      setResult(Activity.RESULT_OK)
+      finish()
+    }
 
     binding.buttonAddToFavorite.setOnClickListener {
       if (viewModel.isMovieFavorited.value == true) {
@@ -81,6 +85,11 @@ class DetailMovieActivity : AppCompatActivity() {
         }
       })
     }
+  }
+
+  override fun onBackPressed() {
+    setResult(Activity.RESULT_OK)
+    finish()
   }
 
   companion object {
